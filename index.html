@@ -1,0 +1,4331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SHRED OFF — Fingerboard Decks</title>
+
+<style>
+
+:root{
+  --bg:#070707;
+  --bg2:#0d0d0d;
+  --card:#111111;
+  --card2:#151515;
+  --red:#ff2020;
+  --red2:#c90000;
+  --white:#ffffff;
+  --muted:#9b9b9b;
+  --line:#242424;
+  --green:#39d98a;
+  --yellow:#ffd84d;
+  --shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,32,32,.10),transparent 30%),
+    radial-gradient(circle at 80% 15%,rgba(255,32,32,.06),transparent 25%),
+    var(--bg);
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+::-webkit-scrollbar{
+  width:9px;
+}
+
+::-webkit-scrollbar-track{
+  background:#050505;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#292929;
+  border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:var(--red);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  background:rgba(5,5,5,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.logo{
+  font-size:25px;
+  font-weight:1000;
+  letter-spacing:-1.5px;
+}
+
+.logo span{
+  color:var(--red);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+.nav a{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  color:#bcbcbc;
+  transition:.2s;
+}
+
+.nav a:hover{
+  color:#fff;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.small-btn{
+  border:1px solid #2b2b2b;
+  background:#111;
+  color:#fff;
+  padding:10px 13px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.8px;
+  transition:.2s;
+}
+
+.small-btn:hover{
+  border-color:var(--red);
+  transform:translateY(-2px);
+}
+
+.bag-btn{
+  position:relative;
+}
+
+.bag-count{
+  position:absolute;
+  top:-7px;
+  right:-7px;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--red);
+  border-radius:50px;
+  font-size:10px;
+  font-weight:1000;
+}
+
+.mobile-menu-btn{
+  display:none;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+  min-height:calc(100vh - 78px);
+  display:flex;
+  align-items:center;
+  padding:80px 7%;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:600px;
+  height:600px;
+  right:-180px;
+  top:-180px;
+  background:radial-gradient(circle,rgba(255,25,25,.14),transparent 65%);
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  left:-200px;
+  bottom:-200px;
+  border-radius:50%;
+  background:rgba(255,20,20,.06);
+  filter:blur(20px);
+}
+
+.hero-content{
+  max-width:850px;
+  position:relative;
+  z-index:2;
+  animation:heroIn .8s ease both;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.kicker{
+  color:var(--red);
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:4px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:clamp(65px,12vw,150px);
+  line-height:.78;
+  letter-spacing:-8px;
+  font-weight:1000;
+  margin-bottom:30px;
+}
+
+.hero h1 span{
+  color:var(--red);
+}
+
+.hero-description{
+  max-width:610px;
+  color:#a7a7a7;
+  line-height:1.7;
+  font-size:16px;
+  margin-bottom:30px;
+}
+
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.primary-btn,
+.secondary-btn{
+  border:none;
+  padding:15px 21px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:1px;
+  transition:.25s;
+}
+
+.primary-btn{
+  background:var(--red);
+  color:#fff;
+  box-shadow:0 10px 30px rgba(255,32,32,.18);
+}
+
+.primary-btn:hover{
+  background:#ff3838;
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(255,32,32,.25);
+}
+
+.secondary-btn{
+  background:#111;
+  color:#fff;
+  border:1px solid #2a2a2a;
+}
+
+.secondary-btn:hover{
+  border-color:#666;
+  transform:translateY(-3px);
+}
+
+.hero-stats{
+  position:absolute;
+  right:7%;
+  bottom:70px;
+  display:flex;
+  gap:25px;
+  z-index:2;
+}
+
+.stat{
+  border-left:2px solid var(--red);
+  padding-left:13px;
+}
+
+.stat strong{
+  display:block;
+  font-size:20px;
+}
+
+.stat small{
+  color:#777;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+
+/* =========================================================
+   RIBBON
+   ========================================================= */
+
+.ribbon{
+  width:100%;
+  overflow:hidden;
+  background:var(--red);
+  color:#fff;
+  transform:rotate(-1deg) scale(1.03);
+  margin:5px 0 50px;
+  border-top:2px solid #ff5c5c;
+  border-bottom:2px solid #8c0000;
+}
+
+.ribbon-track{
+  width:max-content;
+  display:flex;
+  gap:35px;
+  padding:12px 0;
+  animation:ribbonMove 22s linear infinite;
+}
+
+.ribbon-item{
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+
+@keyframes ribbonMove{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+   ========================================================= */
+
+.section{
+  padding:90px 6%;
+  scroll-margin-top:80px;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:35px;
+}
+
+.section-kicker{
+  color:var(--red);
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:3px;
+  margin-bottom:10px;
+}
+
+.section-title{
+  font-size:clamp(35px,6vw,65px);
+  line-height:.9;
+  letter-spacing:-3px;
+  font-weight:1000;
+}
+
+.section-subtitle{
+  max-width:450px;
+  color:#777;
+  font-size:13px;
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   SHOP CONTROLS
+   ========================================================= */
+
+.controls{
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:10px;
+  margin-bottom:25px;
+}
+
+.control{
+  min-height:48px;
+  background:#0d0d0d;
+  color:#fff;
+  border:1px solid #262626;
+  border-radius:9px;
+  padding:0 14px;
+  outline:none;
+}
+
+.control:focus{
+  border-color:var(--red);
+}
+
+input.control::placeholder{
+  color:#666;
+}
+
+
+/* =========================================================
+   TRUST STRIP
+   ========================================================= */
+
+.trust-strip{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:30px;
+}
+
+.trust-item{
+  background:#0d0d0d;
+  border:1px solid #202020;
+  border-radius:12px;
+  padding:16px;
+  text-align:center;
+}
+
+.trust-item strong{
+  display:block;
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:5px;
+}
+
+.trust-item span{
+  color:#777;
+  font-size:10px;
+}
+
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.product-card{
+  position:relative;
+  background:
+    linear-gradient(145deg,#151515,#0d0d0d);
+  border:1px solid #242424;
+  border-radius:17px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.product-card:hover{
+  transform:translateY(-6px);
+  border-color:#3b3b3b;
+  box-shadow:var(--shadow);
+}
+
+.product-top{
+  position:absolute;
+  z-index:4;
+  top:14px;
+  left:14px;
+  right:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+}
+
+.badges{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.badge{
+  padding:6px 9px;
+  border-radius:7px;
+  font-size:9px;
+  font-weight:1000;
+  letter-spacing:1px;
+}
+
+.new-badge{
+  background:var(--red);
+}
+
+.stock-badge{
+  background:rgba(57,217,138,.12);
+  color:var(--green);
+  border:1px solid rgba(57,217,138,.2);
+}
+
+.out-badge{
+  background:rgba(255,255,255,.07);
+  color:#888;
+}
+
+.heart{
+  width:37px;
+  height:37px;
+  border-radius:50%;
+  background:rgba(0,0,0,.65);
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
+  font-size:17px;
+  transition:.2s;
+}
+
+.heart:hover{
+  transform:scale(1.08);
+  border-color:var(--red);
+}
+
+.heart.active{
+  color:var(--red);
+  border-color:var(--red);
+}
+
+.product-image{
+  height:340px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:55px 40px 25px;
+  background:
+    radial-gradient(circle at center,rgba(255,255,255,.05),transparent 55%);
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transition:.5s;
+  filter:drop-shadow(0 20px 25px rgba(0,0,0,.55));
+}
+
+.product-card:hover .product-image img{
+  transform:scale(1.07) rotate(-1deg);
+}
+
+.product-info{
+  padding:20px;
+  border-top:1px solid #202020;
+}
+
+.product-info-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:9px;
+}
+
+.product-name{
+  font-size:22px;
+  font-weight:1000;
+}
+
+.product-price{
+  font-size:17px;
+  font-weight:1000;
+}
+
+.product-description{
+  color:#777;
+  font-size:12px;
+  line-height:1.6;
+  min-height:39px;
+  margin-bottom:14px;
+}
+
+.stock-text{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#888;
+  margin-bottom:14px;
+}
+
+.product-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.product-actions button{
+  min-height:43px;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:80px 20px;
+  color:#777;
+  border:1px dashed #2a2a2a;
+  border-radius:15px;
+}
+
+.empty strong{
+  display:block;
+  color:#fff;
+  margin-bottom:7px;
+}
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.about{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:25px;
+  align-items:stretch;
+}
+
+.about-card{
+  background:#0d0d0d;
+  border:1px solid #222;
+  border-radius:18px;
+  padding:35px;
+}
+
+.about-card h3{
+  font-size:28px;
+  margin-bottom:17px;
+}
+
+.about-card p{
+  color:#888;
+  line-height:1.8;
+  font-size:13px;
+}
+
+.about-points{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:25px;
+}
+
+.about-point{
+  padding:18px;
+  border:1px solid #222;
+  border-radius:12px;
+  background:#111;
+}
+
+.about-point strong{
+  display:block;
+  margin-bottom:6px;
+}
+
+.about-point span{
+  color:#777;
+  font-size:11px;
+  line-height:1.5;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer{
+  padding:50px 6% 35px;
+  border-top:1px solid #191919;
+  background:#050505;
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:35px;
+}
+
+.footer-logo{
+  font-size:28px;
+  font-weight:1000;
+}
+
+.footer-logo span{
+  color:var(--red);
+}
+
+.footer-text{
+  color:#666;
+  font-size:11px;
+  max-width:320px;
+  line-height:1.7;
+}
+
+.footer-links{
+  display:flex;
+  gap:20px;
+}
+
+.footer-links a{
+  color:#777;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.footer-links a:hover{
+  color:#fff;
+}
+
+.footer-bottom{
+  padding-top:20px;
+  border-top:1px solid #181818;
+  color:#555;
+  font-size:10px;
+  display:flex;
+  justify-content:space-between;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(8px);
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(760px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #303030;
+  border-radius:18px;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+  animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:scale(.96) translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  border-bottom:1px solid #242424;
+}
+
+.modal-header h3{
+  font-size:17px;
+}
+
+.close-btn{
+  width:35px;
+  height:35px;
+  border-radius:8px;
+  border:1px solid #2a2a2a;
+  background:#151515;
+  color:#fff;
+  font-size:17px;
+}
+
+.close-btn:hover{
+  border-color:var(--red);
+}
+
+.modal-body{
+  padding:20px;
+}
+
+
+/* =========================================================
+   QUICK VIEW
+   ========================================================= */
+
+.quick-view{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.quick-image{
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b0b0b;
+  border:1px solid #222;
+  border-radius:13px;
+  padding:20px;
+}
+
+.quick-image img{
+  width:100%;
+  height:100%;
+  max-height:360px;
+  object-fit:contain;
+}
+
+.quick-details h2{
+  font-size:38px;
+  letter-spacing:-2px;
+  margin-bottom:8px;
+}
+
+.quick-price{
+  font-size:22px;
+  font-weight:1000;
+  margin-bottom:20px;
+}
+
+.quick-description{
+  color:#888;
+  line-height:1.7;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.label{
+  display:block;
+  color:#aaa;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+
+/* =========================================================
+   UPGRADED SIZE SELECTOR
+   ========================================================= */
+
+.selected-size-display{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:#090909;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:11px 13px;
+  margin-bottom:10px;
+}
+
+.selected-size-display span{
+  color:#666;
+  font-size:9px;
+  font-weight:1000;
+  letter-spacing:1.5px;
+}
+
+.selected-size-display strong{
+  color:var(--red);
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:.5px;
+}
+
+.size-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-bottom:20px;
+}
+
+.size-btn{
+  position:relative;
+  min-width:82px;
+  border:1px solid #303030;
+  background:#151515;
+  color:#aaa;
+  padding:12px 17px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.5px;
+  transition:.2s;
+  overflow:hidden;
+}
+
+.size-btn:hover{
+  color:#fff;
+  border-color:var(--red);
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(255,32,32,.12);
+}
+
+.size-btn.selected{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 0 2px rgba(255,32,32,.18),
+    0 9px 24px rgba(255,32,32,.22);
+}
+
+.size-btn.selected::after{
+  content:"✓";
+  position:absolute;
+  top:4px;
+  right:6px;
+  font-size:8px;
+  font-weight:1000;
+}
+
+.full-btn{
+  width:100%;
+}
+
+
+/* =========================================================
+   CART DRAWER
+   ========================================================= */
+
+.cart-drawer{
+  position:fixed;
+  z-index:2500;
+  top:0;
+  right:0;
+  width:min(470px,100%);
+  height:100vh;
+  background:#0b0b0b;
+  border-left:1px solid #292929;
+  transform:translateX(105%);
+  transition:.3s ease;
+  display:flex;
+  flex-direction:column;
+  box-shadow:-30px 0 80px rgba(0,0,0,.4);
+}
+
+.cart-drawer.show{
+  transform:translateX(0);
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  border-bottom:1px solid #222;
+}
+
+.cart-header h2{
+  font-size:22px;
+}
+
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:15px;
+}
+
+.cart-empty{
+  padding:70px 20px;
+  text-align:center;
+  color:#666;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:70px 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid #1e1e1e;
+}
+
+.cart-thumb{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  background:#151515;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.cart-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.cart-item-name{
+  font-size:13px;
+  font-weight:1000;
+}
+
+.cart-item-size{
+  color:#666;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.cart-item-price{
+  font-size:11px;
+  color:#aaa;
+  margin-top:6px;
+}
+
+.qty-controls{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:8px;
+}
+
+.qty-btn{
+  width:25px;
+  height:25px;
+  border-radius:6px;
+  background:#171717;
+  color:#fff;
+  border:1px solid #292929;
+}
+
+.qty{
+  min-width:18px;
+  text-align:center;
+  font-size:11px;
+}
+
+.remove-btn{
+  border:none;
+  background:none;
+  color:#666;
+  font-size:10px;
+  margin-top:7px;
+}
+
+.remove-btn:hover{
+  color:var(--red);
+}
+
+.cart-summary{
+  padding:18px;
+  border-top:1px solid #242424;
+}
+
+.discount-row{
+  display:flex;
+  gap:7px;
+  margin-bottom:14px;
+}
+
+.discount-row input{
+  flex:1;
+}
+
+.discount-message{
+  color:var(--green);
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:9px;
+  color:#888;
+  font-size:12px;
+}
+
+.summary-row.total{
+  color:#fff;
+  font-size:17px;
+  font-weight:1000;
+  padding-top:10px;
+  border-top:1px solid #242424;
+  margin-top:10px;
+}
+
+.checkout-btn{
+  width:100%;
+  margin-top:13px;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  display:block;
+  color:#888;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  margin-bottom:7px;
+}
+
+.form-control{
+  width:100%;
+  background:#0a0a0a;
+  color:#fff;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:12px;
+  outline:none;
+}
+
+.form-control:focus{
+  border-color:var(--red);
+}
+
+textarea.form-control{
+  min-height:100px;
+  resize:vertical;
+}
+
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#888;
+  font-size:11px;
+  margin:10px 0 15px;
+}
+
+.checkbox-row input{
+  accent-color:var(--red);
+}
+
+
+/* =========================================================
+   OWNER
+   ========================================================= */
+
+.owner-login{
+  max-width:430px;
+  margin:auto;
+}
+
+.owner-note{
+  color:#777;
+  font-size:11px;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.owner-products{
+  display:grid;
+  gap:8px;
+  margin-top:25px;
+}
+
+.owner-product{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:12px;
+  border:1px solid #252525;
+  border-radius:10px;
+  background:#0c0c0c;
+}
+
+.owner-product-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+
+.owner-product-img{
+  width:55px;
+  height:55px;
+  border-radius:8px;
+  background:#151515;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.owner-product-img img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.owner-product-name{
+  font-weight:1000;
+  font-size:12px;
+}
+
+.owner-product-meta{
+  color:#666;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.owner-actions{
+  display:flex;
+  gap:6px;
+}
+
+.danger-btn{
+  border:1px solid rgba(255,32,32,.3);
+  background:rgba(255,32,32,.08);
+  color:#ff4a4a;
+  padding:9px 10px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.edit-btn{
+  border:1px solid #292929;
+  background:#161616;
+  color:#fff;
+  padding:9px 10px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:900;
+}
+
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
+
+.order-box{
+  background:#0a0a0a;
+  border:1px solid #222;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:20px;
+}
+
+.order-line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid #1d1d1d;
+  font-size:11px;
+  color:#aaa;
+}
+
+.order-line:last-child{
+  border-bottom:none;
+}
+
+.success{
+  text-align:center;
+  padding:35px 10px;
+}
+
+.success-icon{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:rgba(57,217,138,.12);
+  border:1px solid rgba(57,217,138,.25);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 18px;
+  font-size:30px;
+}
+
+.success h2{
+  margin-bottom:9px;
+}
+
+.success p{
+  color:#777;
+  font-size:12px;
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast-container{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:5000;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.toast{
+  min-width:230px;
+  max-width:350px;
+  padding:13px 15px;
+  background:#151515;
+  border:1px solid #333;
+  border-left:3px solid var(--red);
+  border-radius:9px;
+  box-shadow:var(--shadow);
+  font-size:11px;
+  font-weight:700;
+  animation:toastIn .25s ease;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateX(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+.back-top{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:1500;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid #292929;
+  background:#111;
+  color:#fff;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+}
+
+.back-top.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.back-top:hover{
+  border-color:var(--red);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:900px){
+
+  header{
+    height:68px;
+  }
+
+  .nav{
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    background:#090909;
+    border-bottom:1px solid #222;
+    padding:18px 5%;
+    display:none;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav.open{
+    display:flex;
+  }
+
+  .mobile-menu-btn{
+    display:block;
+  }
+
+  .hero{
+    min-height:calc(100vh - 68px);
+    padding:70px 6%;
+  }
+
+  .hero h1{
+    letter-spacing:-5px;
+  }
+
+  .hero-stats{
+    position:static;
+    margin-top:55px;
+  }
+
+  .controls{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about{
+    grid-template-columns:1fr;
+  }
+
+  .quick-view{
+    grid-template-columns:1fr;
+  }
+
+  .quick-image{
+    min-height:260px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  header{
+    padding:0 4%;
+  }
+
+  .header-actions .owner-btn{
+    display:none;
+  }
+
+  .hero{
+    padding:65px 5%;
+  }
+
+  .hero h1{
+    font-size:68px;
+    letter-spacing:-5px;
+  }
+
+  .hero-description{
+    font-size:14px;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+  }
+
+  .hero-buttons button{
+    width:100%;
+  }
+
+  .hero-stats{
+    gap:18px;
+  }
+
+  .section{
+    padding:65px 5%;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-subtitle{
+    margin-top:15px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .trust-strip{
+    grid-template-columns:1fr;
+  }
+
+  .product-image{
+    height:300px;
+  }
+
+  .about-card{
+    padding:24px;
+  }
+
+  .about-points{
+    grid-template-columns:1fr;
+  }
+
+  .footer-top{
+    display:block;
+  }
+
+  .footer-links{
+    margin-top:20px;
+  }
+
+  .footer-bottom{
+    display:block;
+    line-height:1.7;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .owner-product{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .owner-actions{
+    width:100%;
+  }
+
+  .owner-actions button{
+    flex:1;
+  }
+
+  .quick-details h2{
+    font-size:32px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <a href="#home" class="logo">
+    SHRED <span>OFF</span>
+  </a>
+
+  <nav class="nav" id="mainNav">
+    <a href="#home" onclick="closeMobileNav()">HOME</a>
+    <a href="#shop" onclick="closeMobileNav()">SHOP</a>
+    <a href="#about" onclick="closeMobileNav()">ABOUT</a>
+  </nav>
+
+  <div class="header-actions">
+
+    <button
+      class="small-btn owner-btn"
+      onclick="openOwner()">
+      OWNER
+    </button>
+
+    <button
+      class="small-btn bag-btn"
+      onclick="openCart()">
+      BAG
+      <span class="bag-count" id="bagCount">0</span>
+    </button>
+
+    <button
+      class="small-btn mobile-menu-btn"
+      onclick="toggleMobileNav()">
+      MENU
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <div class="kicker">
+      DECKS ONLY • BUILT TO RIDE
+    </div>
+
+    <h1>
+      SHRED<br>
+      <span>OFF.</span>
+    </h1>
+
+    <p class="hero-description">
+      Premium fingerboard decks made for clean lines,
+      big tricks and setups that actually look sick.
+      No unnecessary stuff. Just decks.
+    </p>
+
+    <div class="hero-buttons">
+
+      <button
+        class="primary-btn"
+        onclick="scrollToShop()">
+        OUR SHOP DECKS
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="scrollToAbout()">
+        ABOUT SHRED OFF
+      </button>
+
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="stat">
+        <strong>2</strong>
+        <small>DECKS</small>
+      </div>
+
+      <div class="stat">
+        <strong>32/33</strong>
+        <small>MM SIZES</small>
+      </div>
+
+      <div class="stat">
+        <strong>10%</strong>
+        <small>SHREDOFF10</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="ribbon">
+
+  <div class="ribbon-track">
+
+    <div class="ribbon-item">SHRED OFF DECKS</div>
+    <div class="ribbon-item">BUILT TO RIDE</div>
+    <div class="ribbon-item">NEW DROPS</div>
+    <div class="ribbon-item">DECKS ONLY</div>
+    <div class="ribbon-item">32MM / 33MM</div>
+    <div class="ribbon-item">SHRED OFF DECKS</div>
+    <div class="ribbon-item">BUILT TO RIDE</div>
+    <div class="ribbon-item">NEW DROPS</div>
+    <div class="ribbon-item">DECKS ONLY</div>
+    <div class="ribbon-item">32MM / 33MM</div>
+
+  </div>
+
+</div>
+
+
+<section class="section" id="shop">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        THE COLLECTION
+      </div>
+
+      <h2 class="section-title">
+        SHOP DECKS.
+      </h2>
+
+    </div>
+
+    <p class="section-subtitle">
+      Pick your deck, choose your width and build
+      the setup you actually want.
+    </p>
+
+  </div>
+
+
+  <div class="trust-strip">
+
+    <div class="trust-item">
+      <strong>DECKS ONLY</strong>
+      <span>No complete boards.</span>
+    </div>
+
+    <div class="trust-item">
+      <strong>32MM / 33MM</strong>
+      <span>Choose your width.</span>
+    </div>
+
+    <div class="trust-item">
+      <strong>SHREDOFF10</strong>
+      <span>10% off demo code.</span>
+    </div>
+
+  </div>
+
+
+  <div class="controls">
+
+    <input
+      id="searchInput"
+      class="control"
+      type="text"
+      placeholder="Search decks..."
+      oninput="renderProducts()">
+
+    <select
+      id="stockFilter"
+      class="control"
+      onchange="renderProducts()">
+
+      <option value="all">All Stock</option>
+      <option value="in">In Stock</option>
+      <option value="out">Out of Stock</option>
+
+    </select>
+
+    <select
+      id="newFilter"
+      class="control"
+      onchange="renderProducts()">
+
+      <option value="all">All Decks</option>
+      <option value="new">New Only</option>
+
+    </select>
+
+    <select
+      id="sortFilter"
+      class="control"
+      onchange="renderProducts()">
+
+      <option value="featured">Featured</option>
+      <option value="low">Price: Low → High</option>
+      <option value="high">Price: High → Low</option>
+      <option value="name">Name: A → Z</option>
+
+    </select>
+
+  </div>
+
+
+  <div
+    class="product-grid"
+    id="productGrid">
+  </div>
+
+</section>
+
+
+<section class="section" id="about">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="section-kicker">
+        THE IDEA
+      </div>
+
+      <h2 class="section-title">
+        ABOUT SHRED OFF.
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="about">
+
+    <div class="about-card">
+
+      <h3>
+        JUST DECKS.
+      </h3>
+
+      <p>
+        SHRED OFF is built around one simple idea:
+        make fingerboard decks that look good,
+        feel good and are made to be used.
+      </p>
+
+      <p style="margin-top:15px;">
+        No massive catalogue. No pointless extras.
+        Just a small collection of decks with their
+        own style.
+      </p>
+
+      <div class="about-points">
+
+        <div class="about-point">
+          <strong>01 — STYLE</strong>
+          <span>
+            Clean designs and bold graphics.
+          </span>
+        </div>
+
+        <div class="about-point">
+          <strong>02 — CHOICE</strong>
+          <span>
+            Pick 32mm or 33mm.
+          </span>
+        </div>
+
+        <div class="about-point">
+          <strong>03 — SETUP</strong>
+          <span>
+            Build your board your way.
+          </span>
+        </div>
+
+        <div class="about-point">
+          <strong>04 — SHRED</strong>
+          <span>
+            That's what it's all about.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="about-card">
+
+      <div class="section-kicker">
+        CURRENT DROP
+      </div>
+
+      <h3>
+        NIGHTFALL<br>
+        + VELOCITY
+      </h3>
+
+      <p>
+        Two decks. Two completely different
+        looks. One SHRED OFF collection.
+      </p>
+
+      <button
+        class="primary-btn"
+        style="margin-top:25px;"
+        onclick="scrollToShop()">
+        VIEW THE DROP
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <div class="footer-top">
+
+    <div>
+
+      <div class="footer-logo">
+        SHRED <span>OFF</span>
+      </div>
+
+      <p class="footer-text">
+        Fingerboard decks only.
+        Built to ride. Made to stand out.
+      </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a href="#home">HOME</a>
+      <a href="#shop">SHOP</a>
+      <a href="#about">ABOUT</a>
+
+      <a
+        href="#"
+        onclick="openOwner();return false;">
+        OWNER
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 SHRED OFF
+    </span>
+
+    <span>
+      DECKS ONLY • 32MM / 33MM
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- =======================================================
+     QUICK VIEW MODAL
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="quickModal"
+  onclick="closeModalOnOverlay(event,'quickModal')">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>
+        QUICK VIEW
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('quickModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div
+      class="modal-body"
+      id="quickModalBody">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     CHECKOUT MODAL
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="checkoutModal">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>
+        CHECKOUT
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('checkoutModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div
+      class="modal-body"
+      id="checkoutBody">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     OWNER LOGIN MODAL
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="ownerLoginModal"
+  onclick="closeModalOnOverlay(event,'ownerLoginModal')">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>
+        OWNER AREA
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('ownerLoginModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="owner-login">
+
+        <p class="owner-note">
+          Owner Area lets you add, edit and delete
+          decks from the website. Changes are saved
+          in this browser.
+        </p>
+
+        <div class="form-group">
+
+          <label>
+            OWNER PASSWORD
+          </label>
+
+          <input
+            id="ownerPassword"
+            class="form-control"
+            type="password"
+            placeholder="Enter password"
+            onkeydown="if(event.key==='Enter')loginOwner()">
+
+        </div>
+
+        <button
+          class="primary-btn full-btn"
+          onclick="loginOwner()">
+          ENTER OWNER AREA
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     OWNER AREA MODAL
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="ownerModal">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>
+        SHRED OFF OWNER AREA
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('ownerModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="section-kicker">
+        CATALOG CONTROL
+      </div>
+
+      <h2
+        id="ownerFormTitle"
+        style="font-size:28px;margin-bottom:20px;">
+        ADD NEW DECK
+      </h2>
+
+
+      <input
+        type="hidden"
+        id="editProductId">
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            DECK NAME
+          </label>
+
+          <input
+            id="deckName"
+            class="form-control"
+            placeholder="Example: Nightfall">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            PRICE (£)
+          </label>
+
+          <input
+            id="deckPrice"
+            class="form-control"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="31.99">
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>
+            IMAGE URL
+          </label>
+
+          <input
+            id="deckImage"
+            class="form-control"
+            placeholder="https://...">
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>
+            DESCRIPTION
+          </label>
+
+          <textarea
+            id="deckDescription"
+            class="form-control"
+            placeholder="Describe the deck..."></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            SIZES
+          </label>
+
+          <input
+            id="deckSizes"
+            class="form-control"
+            value="32mm,33mm"
+            placeholder="32mm,33mm">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            OPTIONS
+          </label>
+
+          <div class="checkbox-row">
+
+            <input
+              type="checkbox"
+              id="deckNew"
+              checked>
+
+            <label for="deckNew">
+              NEW DECK
+            </label>
+
+          </div>
+
+          <div class="checkbox-row">
+
+            <input
+              type="checkbox"
+              id="deckStock"
+              checked>
+
+            <label for="deckStock">
+              IN STOCK
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div style="display:flex;gap:8px;">
+
+        <button
+          class="primary-btn"
+          onclick="saveOwnerProduct()">
+          SAVE DECK
+        </button>
+
+        <button
+          class="secondary-btn"
+          onclick="resetOwnerForm()">
+          CLEAR
+        </button>
+
+      </div>
+
+
+      <div
+        class="owner-products"
+        id="ownerProducts">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     CART DRAWER
+     ======================================================= -->
+
+<div
+  class="cart-drawer"
+  id="cartDrawer">
+
+  <div class="cart-header">
+
+    <h2>
+      YOUR BAG
+    </h2>
+
+    <button
+      class="close-btn"
+      onclick="closeCart()">
+      ×
+    </button>
+
+  </div>
+
+
+  <div
+    class="cart-items"
+    id="cartItems">
+  </div>
+
+
+  <div class="cart-summary">
+
+    <div class="discount-row">
+
+      <input
+        id="discountInput"
+        class="form-control"
+        placeholder="Discount code">
+
+      <button
+        class="small-btn"
+        onclick="applyDiscount()">
+        APPLY
+      </button>
+
+    </div>
+
+    <div
+      class="discount-message"
+      id="discountMessage">
+    </div>
+
+
+    <div class="summary-row">
+
+      <span>
+        Subtotal
+      </span>
+
+      <span id="subtotal">
+        £0.00
+      </span>
+
+    </div>
+
+
+    <div class="summary-row">
+
+      <span>
+        Discount
+      </span>
+
+      <span id="discountAmount">
+        -£0.00
+      </span>
+
+    </div>
+
+
+    <div class="summary-row total">
+
+      <span>
+        TOTAL
+      </span>
+
+      <span id="cartTotal">
+        £0.00
+      </span>
+
+    </div>
+
+
+    <button
+      class="primary-btn checkout-btn"
+      onclick="openCheckout()">
+      CHECKOUT
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast-container"
+  id="toastContainer">
+</div>
+
+
+<button
+  class="back-top"
+  id="backTop"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  ↑
+</button>
+
+
+<script>
+
+/* =========================================================
+   DEFAULT PRODUCTS
+   ========================================================= */
+
+const DEFAULT_PRODUCTS = [
+
+  {
+    id:"nightfall",
+    name:"Nightfall",
+    price:31.99,
+    new:true,
+    stock:true,
+    image:"https://i.ibb.co/Ldj7CWVf/Nightfall.png",
+    description:
+      "Clean natural-wood SHRED OFF deck with a premium minimal look.",
+    sizes:[
+      "32mm",
+      "33mm"
+    ]
+  },
+
+  {
+    id:"velocity",
+    name:"Velocity",
+    price:32.99,
+    new:true,
+    stock:true,
+    image:"https://i.ibb.co/hFL7fB5d/Velocity.png",
+    description:
+      "A loud graffiti-inspired deck made to stand out on any setup.",
+    sizes:[
+      "32mm",
+      "33mm"
+    ]
+  }
+
+];
+
+
+/* =========================================================
+   CATALOG VERSION
+   ========================================================= */
+
+const CATALOG_VERSION =
+  "shred-off-nightfall-velocity-v2";
+
+let products;
+
+const savedVersion =
+  localStorage.getItem(
+    "shredOffCatalogVersion"
+  );
+
+if(savedVersion !== CATALOG_VERSION){
+
+  products =
+    DEFAULT_PRODUCTS.map(product => ({
+      ...product,
+      sizes:[...product.sizes]
+    }));
+
+  localStorage.setItem(
+    "shredOffProducts",
+    JSON.stringify(products)
+  );
+
+  localStorage.setItem(
+    "shredOffCatalogVersion",
+    CATALOG_VERSION
+  );
+
+}else{
+
+  products =
+    JSON.parse(
+      localStorage.getItem("shredOffProducts")
+    ) ||
+    DEFAULT_PRODUCTS;
+
+}
+
+
+/* =========================================================
+   FORCE CORRECT IMAGES
+   ========================================================= */
+
+products = products.map(product => {
+
+  if(product.id === "nightfall"){
+    product.image =
+      "https://i.ibb.co/Ldj7CWVf/Nightfall.png";
+  }
+
+  if(product.id === "velocity"){
+    product.image =
+      "https://i.ibb.co/hFL7fB5d/Velocity.png";
+  }
+
+  return product;
+
+});
+
+saveProducts();
+
+
+/* =========================================================
+   CART / WISHLIST
+   ========================================================= */
+
+let cart =
+  JSON.parse(
+    localStorage.getItem("shredOffCart") || "[]"
+  );
+
+let wishlist =
+  JSON.parse(
+    localStorage.getItem("shredOffWishlist") || "[]"
+  );
+
+let discountApplied = false;
+
+let selectedQuickSize = null;
+
+
+/* =========================================================
+   SAVE HELPERS
+   ========================================================= */
+
+function saveProducts(){
+
+  localStorage.setItem(
+    "shredOffProducts",
+    JSON.stringify(products)
+  );
+
+}
+
+function saveCart(){
+
+  localStorage.setItem(
+    "shredOffCart",
+    JSON.stringify(cart)
+  );
+
+}
+
+function saveWishlist(){
+
+  localStorage.setItem(
+    "shredOffWishlist",
+    JSON.stringify(wishlist)
+  );
+
+}
+
+
+/* =========================================================
+   MONEY
+   ========================================================= */
+
+function money(value){
+
+  return "£" +
+    Number(value).toFixed(2);
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
+   ========================================================= */
+
+function renderProducts(){
+
+  const grid =
+    document.getElementById("productGrid");
+
+  const search =
+    document.getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const stock =
+    document.getElementById("stockFilter")
+      .value;
+
+  const newFilter =
+    document.getElementById("newFilter")
+      .value;
+
+  const sort =
+    document.getElementById("sortFilter")
+      .value;
+
+
+  let filtered =
+    products.filter(product => {
+
+      const matchesSearch =
+        !search ||
+        product.name.toLowerCase().includes(search) ||
+        product.description.toLowerCase().includes(search);
+
+      const matchesStock =
+        stock === "all" ||
+        (stock === "in" && product.stock) ||
+        (stock === "out" && !product.stock);
+
+      const matchesNew =
+        newFilter === "all" ||
+        (newFilter === "new" && product.new);
+
+      return (
+        matchesSearch &&
+        matchesStock &&
+        matchesNew
+      );
+
+    });
+
+
+  if(sort === "low"){
+
+    filtered.sort(
+      (a,b) => a.price - b.price
+    );
+
+  }
+
+  if(sort === "high"){
+
+    filtered.sort(
+      (a,b) => b.price - a.price
+    );
+
+  }
+
+  if(sort === "name"){
+
+    filtered.sort(
+      (a,b) =>
+        a.name.localeCompare(b.name)
+    );
+
+  }
+
+
+  if(filtered.length === 0){
+
+    grid.innerHTML = `
+      <div class="empty">
+        <strong>No decks found.</strong>
+        Try changing your search or filters.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    filtered.map(product => {
+
+      const liked =
+        wishlist.includes(product.id);
+
+      return `
+
+        <article class="product-card">
+
+          <div class="product-top">
+
+            <div class="badges">
+
+              ${
+                product.new
+                ?
+                `<span class="badge new-badge">
+                  NEW
+                </span>`
+                :
+                ""
+              }
+
+              ${
+                product.stock
+                ?
+                `<span class="badge stock-badge">
+                  IN STOCK
+                </span>`
+                :
+                `<span class="badge out-badge">
+                  SOLD OUT
+                </span>`
+              }
+
+            </div>
+
+
+            <button
+              class="heart ${liked ? "active" : ""}"
+              onclick="toggleWishlist('${product.id}')"
+              title="Wishlist">
+
+              ${liked ? "♥" : "♡"}
+
+            </button>
+
+          </div>
+
+
+          <div class="product-image">
+
+            <img
+              src="${escapeHTML(product.image)}"
+              alt="${escapeHTML(product.name)}"
+              onerror="this.style.opacity='.25'">
+
+          </div>
+
+
+          <div class="product-info">
+
+            <div class="product-info-top">
+
+              <div class="product-name">
+                ${escapeHTML(product.name)}
+              </div>
+
+              <div class="product-price">
+                ${money(product.price)}
+              </div>
+
+            </div>
+
+
+            <div class="product-description">
+              ${escapeHTML(product.description)}
+            </div>
+
+
+            <div class="stock-text">
+
+              ${
+                product.stock
+                ?
+                "READY TO SHRED"
+                :
+                "CURRENTLY OUT OF STOCK"
+              }
+
+            </div>
+
+
+            <div class="product-actions">
+
+              <button
+                class="secondary-btn"
+                onclick="openQuickView('${product.id}')">
+                DETAILS
+              </button>
+
+
+              <button
+                class="primary-btn"
+                ${
+                  product.stock
+                  ?
+                  `onclick="openQuickView('${product.id}')"`
+                  :
+                  `disabled`
+                }>
+                ${product.stock ? "ADD" : "SOLD OUT"}
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   WISHLIST
+   ========================================================= */
+
+function toggleWishlist(id){
+
+  if(wishlist.includes(id)){
+
+    wishlist =
+      wishlist.filter(
+        item => item !== id
+      );
+
+    showToast("Removed from wishlist.");
+
+  }else{
+
+    wishlist.push(id);
+
+    showToast("Added to wishlist ♥");
+
+  }
+
+  saveWishlist();
+  renderProducts();
+
+}
+
+
+/* =========================================================
+   QUICK VIEW
+   ========================================================= */
+
+function openQuickView(id){
+
+  const product =
+    products.find(
+      item => item.id === id
+    );
+
+  if(!product) return;
+
+
+  selectedQuickSize =
+    product.sizes[0] || "32mm";
+
+
+  document.getElementById(
+    "quickModalBody"
+  ).innerHTML = `
+
+    <div class="quick-view">
+
+      <div class="quick-image">
+
+        <img
+          src="${escapeHTML(product.image)}"
+          alt="${escapeHTML(product.name)}">
+
+      </div>
+
+
+      <div class="quick-details">
+
+        <div class="section-kicker">
+          SHRED OFF DECK
+        </div>
+
+        <h2>
+          ${escapeHTML(product.name)}
+        </h2>
+
+        <div class="quick-price">
+          ${money(product.price)}
+        </div>
+
+        <p class="quick-description">
+          ${escapeHTML(product.description)}
+        </p>
+
+
+        <span class="label">
+          CHOOSE SIZE
+        </span>
+
+
+        <div class="selected-size-display">
+
+          <span>
+            SELECTED SIZE
+          </span>
+
+          <strong id="selectedSizeText">
+            ${escapeHTML(selectedQuickSize)}
+          </strong>
+
+        </div>
+
+
+        <div class="size-buttons">
+
+          ${product.sizes.map(size => `
+
+            <button
+              class="size-btn ${
+                size === selectedQuickSize
+                ? "selected"
+                : ""
+              }"
+              data-size="${escapeHTML(size)}"
+              aria-pressed="${
+                size === selectedQuickSize
+                ? "true"
+                : "false"
+              }"
+              onclick="selectQuickSize('${escapeHTML(size)}')">
+
+              ${escapeHTML(size)}
+
+            </button>
+
+          `).join("")}
+
+        </div>
+
+
+        <button
+          class="primary-btn full-btn"
+          ${
+            product.stock
+            ? ""
+            : "disabled"
+          }
+          onclick="addToCart('${product.id}',selectedQuickSize)">
+
+          ${
+            product.stock
+            ? "ADD TO BAG"
+            : "SOLD OUT"
+          }
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("quickModal")
+    .classList.add("show");
+
+}
+
+
+function selectQuickSize(size){
+
+  selectedQuickSize = size;
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#quickModal .size-btn"
+    );
+
+
+  buttons.forEach(button => {
+
+    const isSelected =
+      button.dataset.size === size;
+
+    button.classList.toggle(
+      "selected",
+      isSelected
+    );
+
+    button.setAttribute(
+      "aria-pressed",
+      isSelected
+        ? "true"
+        : "false"
+    );
+
+  });
+
+
+  const selectedSizeText =
+    document.getElementById(
+      "selectedSizeText"
+    );
+
+
+  if(selectedSizeText){
+
+    selectedSizeText.textContent =
+      size;
+
+  }
+
+}
+
+
+/* =========================================================
+   CART
+   ========================================================= */
+
+function addToCart(productId,size){
+
+  const product =
+    products.find(
+      item => item.id === productId
+    );
+
+  if(!product || !product.stock){
+
+    showToast(
+      "That deck is currently sold out."
+    );
+
+    return;
+
+  }
+
+
+  const chosenSize =
+    size ||
+    product.sizes[0] ||
+    "32mm";
+
+
+  const existing =
+    cart.find(
+      item =>
+        item.productId === productId &&
+        item.size === chosenSize
+    );
+
+
+  if(existing){
+
+    existing.quantity += 1;
+
+  }else{
+
+    cart.push({
+
+      productId:productId,
+      size:chosenSize,
+      quantity:1
+
+    });
+
+  }
+
+
+  saveCart();
+  updateCart();
+
+  showToast(
+    `${product.name} ${chosenSize} added to bag.`
+  );
+
+
+  closeModal("quickModal");
+
+}
+
+
+function changeQuantity(productId,size,amount){
+
+  const item =
+    cart.find(
+      cartItem =>
+        cartItem.productId === productId &&
+        cartItem.size === size
+    );
+
+  if(!item) return;
+
+
+  item.quantity += amount;
+
+
+  if(item.quantity <= 0){
+
+    cart =
+      cart.filter(
+        cartItem =>
+          !(
+            cartItem.productId === productId &&
+            cartItem.size === size
+          )
+      );
+
+  }
+
+
+  saveCart();
+  updateCart();
+
+}
+
+
+function removeFromCart(productId,size){
+
+  cart =
+    cart.filter(
+      item =>
+        !(
+          item.productId === productId &&
+          item.size === size
+        )
+    );
+
+
+  saveCart();
+  updateCart();
+
+  showToast("Removed from bag.");
+
+}
+
+
+/* =========================================================
+   CART CALCULATIONS
+   ========================================================= */
+
+function getSubtotal(){
+
+  return cart.reduce(
+    (total,item) => {
+
+      const product =
+        products.find(
+          p => p.id === item.productId
+        );
+
+      if(!product) return total;
+
+      return total +
+        product.price * item.quantity;
+
+    },
+    0
+  );
+
+}
+
+
+function getDiscount(){
+
+  if(!discountApplied) return 0;
+
+  return getSubtotal() * .10;
+
+}
+
+
+function getTotal(){
+
+  return getSubtotal() - getDiscount();
+
+}
+
+
+/* =========================================================
+   UPDATE CART
+   ========================================================= */
+
+function updateCart(){
+
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const count =
+    cart.reduce(
+      (total,item) =>
+        total + item.quantity,
+      0
+    );
+
+
+  document.getElementById(
+    "bagCount"
+  ).textContent = count;
+
+
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+
+      <div class="cart-empty">
+
+        <div style="font-size:35px;margin-bottom:12px;">
+          🛹
+        </div>
+
+        <strong style="color:#fff;display:block;margin-bottom:7px;">
+          Your bag is empty.
+        </strong>
+
+        <span>
+          Go find a deck to shred.
+        </span>
+
+      </div>
+
+    `;
+
+  }else{
+
+    cartItems.innerHTML =
+      cart.map(item => {
+
+        const product =
+          products.find(
+            p => p.id === item.productId
+          );
+
+        if(!product) return "";
+
+        return `
+
+          <div class="cart-item">
+
+            <div class="cart-thumb">
+
+              <img
+                src="${escapeHTML(product.image)}"
+                alt="${escapeHTML(product.name)}">
+
+            </div>
+
+
+            <div>
+
+              <div class="cart-item-name">
+                ${escapeHTML(product.name)}
+              </div>
+
+              <div class="cart-item-size">
+                SIZE: ${escapeHTML(item.size)}
+              </div>
+
+              <div class="cart-item-price">
+                ${money(product.price)}
+              </div>
+
+
+              <div class="qty-controls">
+
+                <button
+                  class="qty-btn"
+                  onclick="changeQuantity(
+                    '${product.id}',
+                    '${escapeHTML(item.size)}',
+                    -1
+                  )">
+                  −
+                </button>
+
+                <span class="qty">
+                  ${item.quantity}
+                </span>
+
+                <button
+                  class="qty-btn"
+                  onclick="changeQuantity(
+                    '${product.id}',
+                    '${escapeHTML(item.size)}',
+                    1
+                  )">
+                  +
+                </button>
+
+              </div>
+
+
+              <button
+                class="remove-btn"
+                onclick="removeFromCart(
+                  '${product.id}',
+                  '${escapeHTML(item.size)}'
+                )">
+
+                REMOVE
+
+              </button>
+
+            </div>
+
+
+            <strong>
+              ${money(product.price * item.quantity)}
+            </strong>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  document.getElementById(
+    "subtotal"
+  ).textContent =
+    money(getSubtotal());
+
+
+  document.getElementById(
+    "discountAmount"
+  ).textContent =
+    "-" + money(getDiscount());
+
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    money(getTotal());
+
+}
+
+
+/* =========================================================
+   DISCOUNT
+   ========================================================= */
+
+function applyDiscount(){
+
+  const input =
+    document.getElementById(
+      "discountInput"
+    );
+
+  const message =
+    document.getElementById(
+      "discountMessage"
+    );
+
+
+  const code =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  if(code === "SHREDOFF10"){
+
+    discountApplied = true;
+
+    message.textContent =
+      "10% discount applied ✓";
+
+    showToast(
+      "SHREDOFF10 applied — 10% off."
+    );
+
+  }else{
+
+    discountApplied = false;
+
+    message.textContent =
+      "Invalid discount code.";
+
+  }
+
+
+  updateCart();
+
+}
+
+
+/* =========================================================
+   CART DRAWER
+   ========================================================= */
+
+function openCart(){
+
+  document
+    .getElementById("cartDrawer")
+    .classList.add("show");
+
+  updateCart();
+
+}
+
+
+function closeCart(){
+
+  document
+    .getElementById("cartDrawer")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
+
+function openCheckout(){
+
+  if(cart.length === 0){
+
+    showToast(
+      "Your bag is empty."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "checkoutBody"
+  ).innerHTML = `
+
+    <div class="section-kicker">
+      DEMO CHECKOUT
+    </div>
+
+    <h2 style="font-size:30px;margin-bottom:20px;">
+      YOUR ORDER
+    </h2>
+
+
+    <div class="order-box">
+
+      ${
+        cart.map(item => {
+
+          const product =
+            products.find(
+              p => p.id === item.productId
+            );
+
+          if(!product) return "";
+
+          return `
+
+            <div class="order-line">
+
+              <span>
+                ${escapeHTML(product.name)}
+                × ${item.quantity}
+                (${escapeHTML(item.size)})
+              </span>
+
+              <strong>
+                ${money(
+                  product.price *
+                  item.quantity
+                )}
+              </strong>
+
+            </div>
+
+          `;
+
+        }).join("")
+      }
+
+
+      <div
+        class="order-line"
+        style="font-weight:1000;color:#fff;">
+
+        <span>
+          TOTAL
+        </span>
+
+        <strong>
+          ${money(getTotal())}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>
+          NAME
+        </label>
+
+        <input
+          id="checkoutName"
+          class="form-control"
+          placeholder="Your name">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          EMAIL
+        </label>
+
+        <input
+          id="checkoutEmail"
+          class="form-control"
+          type="email"
+          placeholder="you@example.com">
+
+      </div>
+
+
+      <div class="form-group full">
+
+        <label>
+          ADDRESS
+        </label>
+
+        <input
+          id="checkoutAddress"
+          class="form-control"
+          placeholder="Delivery address">
+
+      </div>
+
+    </div>
+
+
+    <p
+      style="
+        color:#666;
+        font-size:10px;
+        line-height:1.6;
+        margin:5px 0 15px;
+      ">
+
+      This is a demo checkout for the SHRED OFF
+      website. No real payment is taken.
+
+    </p>
+
+
+    <button
+      class="primary-btn full-btn"
+      onclick="completeCheckout()">
+
+      PLACE DEMO ORDER
+
+    </button>
+
+  `;
+
+
+  document
+    .getElementById("checkoutModal")
+    .classList.add("show");
+
+}
+
+
+function completeCheckout(){
+
+  const name =
+    document
+      .getElementById("checkoutName")
+      .value
+      .trim();
+
+  const email =
+    document
+      .getElementById("checkoutEmail")
+      .value
+      .trim();
+
+  const address =
+    document
+      .getElementById("checkoutAddress")
+      .value
+      .trim();
+
+
+  if(!name || !email || !address){
+
+    showToast(
+      "Please fill in the demo checkout details."
+    );
+
+    return;
+
+  }
+
+
+  const orderNumber =
+    "SO-" +
+    Math.floor(
+      100000 + Math.random() * 900000
+    );
+
+
+  document.getElementById(
+    "checkoutBody"
+  ).innerHTML = `
+
+    <div class="success">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <h2>
+        ORDER CONFIRMED
+      </h2>
+
+      <p>
+        Nice one, ${escapeHTML(name)}!<br><br>
+
+        Your demo SHRED OFF order
+        <strong style="color:#fff;">
+          ${orderNumber}
+        </strong>
+        has been created.
+      </p>
+
+      <button
+        class="primary-btn"
+        style="margin-top:20px;"
+        onclick="finishCheckout()">
+
+        DONE
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+function finishCheckout(){
+
+  cart = [];
+
+  discountApplied = false;
+
+  saveCart();
+  updateCart();
+
+  closeModal("checkoutModal");
+  closeCart();
+
+  showToast(
+    "Demo order complete. SHRED OFF! 🛹"
+  );
+
+}
+
+
+/* =========================================================
+   OWNER LOGIN
+   ========================================================= */
+
+const OWNER_PASSWORD =
+  "blacklash321";
+
+
+function openOwner(){
+
+  document
+    .getElementById("ownerLoginModal")
+    .classList.add("show");
+
+}
+
+
+function loginOwner(){
+
+  const password =
+    document.getElementById(
+      "ownerPassword"
+    ).value;
+
+
+  if(password !== OWNER_PASSWORD){
+
+    showToast(
+      "Wrong owner password."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "ownerPassword"
+  ).value = "";
+
+
+  closeModal("ownerLoginModal");
+
+  document
+    .getElementById("ownerModal")
+    .classList.add("show");
+
+  renderOwnerProducts();
+
+}
+
+
+/* =========================================================
+   OWNER PRODUCTS
+   ========================================================= */
+
+function renderOwnerProducts(){
+
+  const box =
+    document.getElementById(
+      "ownerProducts"
+    );
+
+
+  if(products.length === 0){
+
+    box.innerHTML = `
+      <div class="empty">
+        <strong>No decks in catalogue.</strong>
+        Add one above.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    products.map(product => `
+
+      <div class="owner-product">
+
+        <div class="owner-product-info">
+
+          <div class="owner-product-img">
+
+            <img
+              src="${escapeHTML(product.image)}"
+              alt="${escapeHTML(product.name)}">
+
+          </div>
+
+
+          <div>
+
+            <div class="owner-product-name">
+              ${escapeHTML(product.name)}
+            </div>
+
+            <div class="owner-product-meta">
+
+              ${money(product.price)}
+              •
+              ${product.sizes.join(" / ")}
+              •
+              ${product.stock ? "In Stock" : "Out of Stock"}
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="owner-actions">
+
+          <button
+            class="edit-btn"
+            onclick="editProduct('${product.id}')">
+
+            EDIT
+
+          </button>
+
+
+          <button
+            class="danger-btn"
+            onclick="deleteProduct('${product.id}')">
+
+            DELETE
+
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   OWNER SAVE
+   ========================================================= */
+
+function saveOwnerProduct(){
+
+  const editId =
+    document.getElementById(
+      "editProductId"
+    ).value;
+
+
+  const name =
+    document.getElementById(
+      "deckName"
+    ).value.trim();
+
+
+  const price =
+    Number(
+      document.getElementById(
+        "deckPrice"
+      ).value
+    );
+
+
+  const image =
+    document.getElementById(
+      "deckImage"
+    ).value.trim();
+
+
+  const description =
+    document.getElementById(
+      "deckDescription"
+    ).value.trim();
+
+
+  const sizes =
+    document.getElementById(
+      "deckSizes"
+    ).value
+    .split(",")
+    .map(size => size.trim())
+    .filter(Boolean);
+
+
+  const isNew =
+    document.getElementById(
+      "deckNew"
+    ).checked;
+
+
+  const inStock =
+    document.getElementById(
+      "deckStock"
+    ).checked;
+
+
+  if(!name){
+
+    showToast(
+      "Enter a deck name."
+    );
+
+    return;
+
+  }
+
+
+  if(!price || price < 0){
+
+    showToast(
+      "Enter a valid price."
+    );
+
+    return;
+
+  }
+
+
+  if(!image){
+
+    showToast(
+      "Add an image URL."
+    );
+
+    return;
+
+  }
+
+
+  if(sizes.length === 0){
+
+    showToast(
+      "Add at least one size."
+    );
+
+    return;
+
+  }
+
+
+  if(editId){
+
+    const product =
+      products.find(
+        p => p.id === editId
+      );
+
+
+    if(product){
+
+      product.name = name;
+      product.price = price;
+      product.image = image;
+      product.description = description;
+      product.sizes = sizes;
+      product.new = isNew;
+      product.stock = inStock;
+
+      showToast(
+        "Deck updated."
+      );
+
+    }
+
+  }else{
+
+    const id =
+      name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-|-$/g,"") +
+      "-" +
+      Date.now();
+
+
+    products.push({
+
+      id:id,
+      name:name,
+      price:price,
+      new:isNew,
+      stock:inStock,
+      image:image,
+      description:
+        description ||
+        "SHRED OFF fingerboard deck.",
+      sizes:sizes
+
+    });
+
+
+    showToast(
+      "New deck added."
+    );
+
+  }
+
+
+  saveProducts();
+
+  resetOwnerForm();
+
+  renderOwnerProducts();
+
+  renderProducts();
+
+}
+
+
+/* =========================================================
+   EDIT PRODUCT
+   ========================================================= */
+
+function editProduct(id){
+
+  const product =
+    products.find(
+      p => p.id === id
+    );
+
+  if(!product) return;
+
+
+  document.getElementById(
+    "editProductId"
+  ).value = product.id;
+
+
+  document.getElementById(
+    "deckName"
+  ).value = product.name;
+
+
+  document.getElementById(
+    "deckPrice"
+  ).value = product.price;
+
+
+  document.getElementById(
+    "deckImage"
+  ).value = product.image;
+
+
+  document.getElementById(
+    "deckDescription"
+  ).value = product.description;
+
+
+  document.getElementById(
+    "deckSizes"
+  ).value = product.sizes.join(",");
+
+
+  document.getElementById(
+    "deckNew"
+  ).checked = !!product.new;
+
+
+  document.getElementById(
+    "deckStock"
+  ).checked = !!product.stock;
+
+
+  document.getElementById(
+    "ownerFormTitle"
+  ).textContent =
+    "EDIT DECK";
+
+
+  document
+    .getElementById("ownerModal")
+    .querySelector(".modal")
+    .scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   DELETE PRODUCT
+   ========================================================= */
+
+function deleteProduct(id){
+
+  const product =
+    products.find(
+      p => p.id === id
+    );
+
+  if(!product) return;
+
+
+  const confirmed =
+    confirm(
+      `Delete "${product.name}" from SHRED OFF?`
+    );
+
+
+  if(!confirmed) return;
+
+
+  products =
+    products.filter(
+      p => p.id !== id
+    );
+
+
+  cart =
+    cart.filter(
+      item =>
+        item.productId !== id
+    );
+
+
+  wishlist =
+    wishlist.filter(
+      item => item !== id
+    );
+
+
+  saveProducts();
+  saveCart();
+  saveWishlist();
+
+  renderOwnerProducts();
+  renderProducts();
+  updateCart();
+
+  showToast(
+    `${product.name} deleted.`
+  );
+
+}
+
+
+/* =========================================================
+   RESET OWNER FORM
+   ========================================================= */
+
+function resetOwnerForm(){
+
+  document.getElementById(
+    "editProductId"
+  ).value = "";
+
+
+  document.getElementById(
+    "deckName"
+  ).value = "";
+
+
+  document.getElementById(
+    "deckPrice"
+  ).value = "";
+
+
+  document.getElementById(
+    "deckImage"
+  ).value = "";
+
+
+  document.getElementById(
+    "deckDescription"
+  ).value = "";
+
+
+  document.getElementById(
+    "deckSizes"
+  ).value = "32mm,33mm";
+
+
+  document.getElementById(
+    "deckNew"
+  ).checked = true;
+
+
+  document.getElementById(
+    "deckStock"
+  ).checked = true;
+
+
+  document.getElementById(
+    "ownerFormTitle"
+  ).textContent =
+    "ADD NEW DECK";
+
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+function closeModalOnOverlay(event,id){
+
+  if(event.target.id === id){
+
+    closeModal(id);
+
+  }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function scrollToShop(){
+
+  document
+    .getElementById("shop")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function scrollToAbout(){
+
+  document
+    .getElementById("about")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function toggleMobileNav(){
+
+  document
+    .getElementById("mainNav")
+    .classList.toggle("open");
+
+}
+
+
+function closeMobileNav(){
+
+  document
+    .getElementById("mainNav")
+    .classList.remove("open");
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(message){
+
+  const container =
+    document.getElementById(
+      "toastContainer"
+    );
+
+
+  const toast =
+    document.createElement("div");
+
+
+  toast.className = "toast";
+
+  toast.textContent = message;
+
+
+  container.appendChild(toast);
+
+
+  setTimeout(() => {
+
+    toast.style.opacity = "0";
+    toast.style.transform =
+      "translateX(20px)";
+
+    setTimeout(() => {
+
+      toast.remove();
+
+    },250);
+
+  },2800);
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    const button =
+      document.getElementById(
+        "backTop"
+      );
+
+
+    if(window.scrollY > 500){
+
+      button.classList.add("show");
+
+    }else{
+
+      button.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   ESC KEY
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      closeModal("quickModal");
+      closeModal("checkoutModal");
+      closeModal("ownerLoginModal");
+      closeModal("ownerModal");
+      closeCart();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALISE
+   ========================================================= */
+
+renderProducts();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
