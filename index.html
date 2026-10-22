@@ -566,6 +566,28 @@ input.control::placeholder{
   object-fit:contain;
   transition:.5s;
   filter:drop-shadow(0 20px 25px rgba(0,0,0,.55));
+}  .nightfall-gallery {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.nightfall-gallery img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  padding: 4px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nightfall-gallery img:hover {
+  border-color: #e10600;
 }
 
 .product-card:hover .product-image img{
@@ -2732,11 +2754,25 @@ function renderProducts(){
 
           <div class="product-image">
 
-            <img
-              src="${escapeHTML(product.image)}"
-              alt="${escapeHTML(product.name)}"
-              onerror="this.style.opacity='.25'">
+  <img
+    src="${escapeHTML(product.image)}"
+    alt="${escapeHTML(product.name)}"
+    onerror="this.style.opacity='.25'">
 
+  ${
+    product.id === "nightfall" && product.images
+      ? `<div class="nightfall-gallery">
+          ${product.images.map((photo, index) => `
+            <img
+              src="${escapeHTML(photo)}"
+              alt="Nightfall photo ${index + 1}"
+              onclick="this.closest('.product-card').querySelector('.product-image > img').src=this.src">
+          `).join("")}
+        </div>`
+      : ""
+  }
+
+</div>
           </div>
 
 
